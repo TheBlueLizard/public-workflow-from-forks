@@ -23,3 +23,12 @@ jobs:
           token: ${{ secrets.JENKINS_GITHUB_PAT }}
           # fetch-depth 0 means deep clone the repo
           fetch-depth: 0
+      - name: 'Update Version'
+        run: |
+          set -x
+          git config user.name devops
+          git config user.email devops@runtimeverification.com
+          echo "Update VERSION"
+          if git add --update && git commit --message "Set Version: $(cat package/version)"; then
+            git push origin HEAD:${GITHUB_HEAD_REF}
+          fi
