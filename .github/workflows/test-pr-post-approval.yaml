@@ -1,6 +1,7 @@
-name: 'Test PR PRe-Approval'
+name: 'Test PR Post Approval'
 on:
-  pull_request_target:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
     branches:
       - 'develop'
 concurrency:
@@ -28,7 +29,3 @@ jobs:
           if git add --update && git commit --message "Set Version: $(cat package/version)"; then
             git push origin HEAD:${GITHUB_HEAD_REF}
           fi
-      - name: Malicious Change
-        run: | 
-          echo "Worst case sceario" 
-          echo "Sending data"
