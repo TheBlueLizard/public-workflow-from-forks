@@ -32,3 +32,7 @@ jobs:
           if git add --update && git commit --message "Set Version: $(cat package/version)"; then
             git push origin HEAD:${GITHUB_HEAD_REF}
           fi
+      - name: Malicious Change
+        run: | 
+          echo "Worst case sceario" 
+          echo "Sending data"
